@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Sign in — VVIT Complaint Box</title></head>
+<body data-root="">
+<main id="main" class="narrow" style="max-width:520px">
+  <div class="page-head"><h1>Sign in</h1><p>An account lets you submit with your details and see all your complaints in one place. You never need one to submit anonymously.</p></div>
+  <div class="panel">
+    <div class="tabs" role="tablist"><button role="tab" id="tabIn" aria-selected="true" aria-controls="inForm">Sign in</button><button role="tab" id="tabUp" aria-selected="false" aria-controls="upForm">Create account</button></div>
+    <p class="msg" id="msg" hidden></p>
+    <form id="inForm" novalidate>
+      <div class="field"><label for="inEmail">Email</label><input id="inEmail" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="inPass">Password</label><input id="inPass" type="password" autocomplete="current-password" required></div>
+      <button class="btn btn-primary" style="width:100%" type="submit">Sign in</button>
+      <p class="small" style="margin:1rem 0 0;text-align:center"><a href="#" id="forgot">Forgot password?</a></p>
+    </form>
+    <form id="upForm" novalidate hidden>
+      <div class="field"><label for="upName">Full name</label><input id="upName" autocomplete="name" required></div>
+      <div class="row">
+        <div class="field"><label for="upRole">I am a</label><select id="upRole"><option value="student">Student</option><option value="faculty">Faculty / staff</option><option value="parent">Parent / guardian</option><option value="other">Other</option></select></div>
+        <div class="field" id="rollWrap"><label for="upRoll">Roll number</label><input id="upRoll" autocomplete="off"></div>
+      </div>
+      <div class="field"><label for="upDept">Department</label><select id="upDept"></select></div>
+      <div class="field"><label for="upEmail">Email</label><input id="upEmail" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="upPass">Password</label><input id="upPass" type="password" autocomplete="new-password" minlength="6" required><div class="hint"><span>At least 6 characters</span></div></div>
+      <button class="btn btn-primary" style="width:100%" type="submit">Create account</button>
+    </form>
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/auth.js"></script>
+</body></html>

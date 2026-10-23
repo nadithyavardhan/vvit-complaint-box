@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>My dashboard — VVIT Complaint Box</title></head>
+<body data-root="">
+<main id="main" class="wrap">
+  <div class="page-head" style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:end">
+    <div><h1 id="hello">My dashboard</h1><p id="sub"></p></div>
+    <div class="cta-row" style="margin:0"><a class="btn btn-primary" href="submit.html?mode=named">New complaint</a><button class="btn btn-outline" id="signOut">Sign out</button></div>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="dash-grid">
+    <section>
+      <div class="toolbar"><h2 style="margin:0;flex:1 1 auto">My complaints</h2>
+        <select id="filter" aria-label="Filter by status" style="flex:0 0 170px"><option value="">All statuses</option><option value="submitted">Received</option><option value="in_review">Under review</option><option value="resolved">Resolved</option><option value="rejected">Closed</option></select></div>
+      <div class="list" id="list"><div class="empty">Loading…</div></div>
+      <p class="small muted" style="margin-top:1rem">Complaints you submitted anonymously are not linked to your account. Track them with their token.</p>
+    </section>
+    <aside style="display:grid;gap:1.25rem">
+      <div class="panel"><h3>My profile</h3><dl class="kv" id="profile" style="grid-template-columns:7rem 1fr"></dl><button class="btn btn-outline btn-sm" id="resetPw" style="margin-top:1rem">Email me a password reset link</button></div>
+      <div class="panel"><h3>Request a campus notice</h3><p class="small muted">Suggest a notice for the home page. The administration reviews it before it appears.</p>
+        <form id="annForm"><div class="field"><label class="sr" for="annText">Notice text</label><textarea id="annText" maxlength="300" style="min-height:80px" required></textarea></div>
+        <p class="msg" id="annMsg" hidden></p><button class="btn btn-primary btn-sm" type="submit">Send request</button></form></div>
+    </aside>
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/dashboard.js"></script>
+</body></html>

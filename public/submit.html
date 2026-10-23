@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Submit a complaint — VVIT Complaint Box</title></head>
+<body data-root="">
+<main id="main" class="narrow">
+  <div class="page-head"><h1>Submit a complaint</h1><p>Describe what happened and what you would like done. Be specific — dates, places and names of offices help us act faster.</p></div>
+  <div class="panel" id="formPanel">
+    <form id="form" novalidate>
+      <div class="legend" id="whoLegend">How would you like to submit?</div>
+      <div class="choice" role="radiogroup" aria-labelledby="whoLegend">
+        <label><input type="radio" name="who" value="anonymous" checked><b>Anonymously</b><span>Nothing identifying is stored.</span></label>
+        <label><input type="radio" name="who" value="named"><b>With my details</b><span>Requires sign-in. Lets us follow up.</span></label>
+      </div>
+      <p class="msg info" id="needLogin" hidden>Please <a href="login.html" id="loginLink">sign in</a> to submit with your details, or choose anonymous.</p>
+      <p class="msg info" id="whoAmI" hidden></p>
+      <div class="row">
+        <div class="field"><label for="category">Category</label><select id="category" required><option value="">Select a category</option></select></div>
+        <div class="field"><label for="department">Department concerned</label><select id="department"><option value="">Select (optional)</option></select></div>
+      </div>
+      <p class="msg info" id="safety" hidden>If anyone is in immediate danger, contact campus security or call <b>112</b> now. You can still file this complaint afterwards.</p>
+      <div class="field"><label for="subject">Subject</label><input id="subject" maxlength="120" placeholder="One-line summary" required>
+        <div class="hint"><span>5–120 characters</span><span id="subjectCount">0/120</span></div></div>
+      <div class="field"><label for="description">What happened?</label><textarea id="description" maxlength="3000" rows="6" required placeholder="When, where, who was involved, and how it affected you."></textarea>
+        <div class="hint"><span>At least 20 characters</span><span id="descCount">0/3000</span></div></div>
+      <div class="field"><label for="resolution">What outcome do you expect? <span class="muted">(optional)</span></label><textarea id="resolution" maxlength="1000" rows="3" style="min-height:80px"></textarea></div>
+      <p class="msg err" id="err" hidden></p>
+      <button class="btn btn-primary" id="submitBtn" type="submit">Submit complaint</button>
+    </form>
+  </div>
+  <div class="panel" id="done" hidden>
+    <h2>Complaint submitted</h2>
+    <p>Your complaint has been received. Save this token — it is the only way to check progress on an anonymous complaint, and it cannot be recovered if lost.</p>
+    <div class="token-box" id="tokenBox"></div>
+    <div class="cta-row" style="margin:0">
+      <button class="btn btn-primary" id="copyBtn" type="button">Copy token</button>
+      <a class="btn btn-outline" id="trackLink" href="track.html">Track this complaint</a>
+      <a class="btn btn-outline" href="submit.html" onclick="location.reload();return false">Submit another</a>
+    </div>
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/submit.js"></script>
+</body></html>

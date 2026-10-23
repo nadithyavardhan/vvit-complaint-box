@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>VVIT Complaint Box — Vasireddy Venkatadri Institute of Technology</title></head>
+<body data-root="">
+<main id="main">
+<section class="hero"><div class="wrap hero-grid">
+  <div>
+    <h1>Something not right on campus? Tell us, and follow it until it is fixed.</h1>
+    <p class="lead">A single place for VVIT students, faculty and parents to raise academic, hostel, transport, infrastructure and safety concerns. Every complaint gets a private token so you can see exactly where it stands.</p>
+    <div class="cta-row"><a class="btn btn-gold" href="submit.html">Submit a complaint</a><a class="btn btn-ghost" href="submit.html?mode=anonymous">Submit anonymously</a></div>
+  </div>
+  <form class="ticket" id="heroTrack" novalidate>
+    <h2>Already filed one?</h2><p class="muted small" style="margin:0">Enter your complaint token to see its status.</p>
+    <div class="stub"></div>
+    <label class="sr" for="tk">Complaint token</label>
+    <input id="tk" placeholder="VVIT-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" maxlength="24">
+    <p id="tkErr" class="msg err" hidden style="margin:.7rem 0 0"></p>
+    <button class="btn btn-primary" type="submit">Check status</button>
+  </form>
+</div></section>
+
+<section class="block"><div class="wrap">
+  <h2>Choose how you want to raise it</h2>
+  <div class="ways">
+    <div><h3>Anonymously</h3><p>No name, email or account is stored with the complaint. Best for sensitive matters. You track it with your token.</p><a href="submit.html?mode=anonymous">Submit anonymously</a></div>
+    <div><h3>With your details</h3><p>Sign in so the administration can follow up with you, and see every complaint you have filed in one dashboard.</p><a href="login.html?next=submit.html">Sign in to submit</a></div>
+    <div><h3>Track a complaint</h3><p>Use the token you received at submission to see whether it is received, under review, or resolved.</p><a href="track.html">Track status</a></div>
+  </div>
+</div></section>
+
+<section class="block" style="padding-top:0"><div class="wrap">
+  <h2>What happens after you submit</h2>
+  <ol class="steps">
+    <li><h3>Received</h3><p>You get a token immediately. Keep it safe.</p></li>
+    <li><h3>Under review</h3><p>The administration reads it and routes it to the right office.</p></li>
+    <li><h3>Action taken</h3><p>The concern is addressed and a note is recorded.</p></li>
+    <li><h3>Resolved</h3><p>The outcome is visible when you track your token.</p></li>
+  </ol>
+</div></section>
+
+<section class="block" style="padding-top:0"><div class="wrap split">
+  <div><h2>What you can raise</h2><div class="cats" id="cats"></div>
+    <div class="privacy" style="margin-top:1.5rem"><b>If someone is in immediate danger</b>, do not wait for a portal response — contact campus security or call 112.</div></div>
+  <div><h2>Campus notices</h2><ul class="notice-list" id="notices"><li class="muted">Loading…</li></ul></div>
+</div></section>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/home.js"></script>
+</body></html>

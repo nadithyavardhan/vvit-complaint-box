@@ -1,0 +1,61 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    // Administrators are the uids that have a document in /admins (created manually in the Firebase console).
+    function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+
+    match /admins/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;   // lets the admin page check its own access
+      allow list, write: if false;                            // managed from the console only
+    }
+
+    match /users/{uid} {
+      allow read, create, update: if signedIn() && request.auth.uid == uid;
+      allow delete: if false;
+    }
+
+    match /complaints/{token} {
+      // The token IS the document id and is the only "key": a single document can be fetched by anyone who knows it,
+      // but nobody can list/search complaints except admins and each user's own (uid-linked) complaints.
+      allow get: if true;
+      allow list: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+
+      allow create: if validNewComplaint(token);
+
+      // Admins may change only these fields.
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'resolution', 'updatedAt', 'resolvedAt'])
+        && request.resource.data.status in ['submitted', 'in_review', 'resolved', 'rejected'];
+      allow delete: if isAdmin();
+
+      function validNewComplaint(token) {
+        let d = request.resource.data;
+        return d.keys().hasOnly(['token','category','department','subject','description','expectedResolution',
+                                 'isAnonymous','status','createdAt','updatedAt','uid','name','email','rollNo'])
+          && d.keys().hasAll(['token','category','subject','description','isAnonymous','status','createdAt','updatedAt'])
+          && d.token == token && token.matches('^VVIT-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$')
+          && d.status == 'submitted'
+          && d.createdAt == request.time && d.updatedAt == request.time
+          && d.category in ['academic','examination','faculty','infrastructure','hostel','transport','canteen','library','sports','fees','harassment','other']
+          && d.subject is string && d.subject.size() >= 5 && d.subject.size() <= 120
+          && d.description is string && d.description.size() >= 20 && d.description.size() <= 3000
+          && d.get('expectedResolution', '').size() <= 1000
+          && d.get('department', '').size() <= 80
+          && (d.isAnonymous == true
+                ? (!('uid' in d) && !('name' in d) && !('email' in d) && !('rollNo' in d))
+                : (signedIn() && d.uid == request.auth.uid && d.get('email', '') == request.auth.token.email));
+      }
+    }
+
+    match /announcements/{id} {
+      allow read: if resource.data.status == 'approved' || isAdmin();
+      allow create: if isAdmin()
+        || (signedIn() && request.resource.data.keys().hasOnly(['text','status','createdBy','createdAt'])
+            && request.resource.data.status == 'pending' && request.resource.data.createdBy == request.auth.uid
+            && request.resource.data.text is string && request.resource.data.text.size() <= 300);
+      allow update, delete: if isAdmin();
+    }
+  }
+}

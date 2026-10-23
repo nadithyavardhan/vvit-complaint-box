@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Track a complaint — VVIT Complaint Box</title></head>
+<body data-root="">
+<main id="main" class="narrow">
+  <div class="page-head"><h1>Track a complaint</h1><p>Enter the token you received when you submitted. Tokens look like <b>VVIT-AB12-CD34-EF56</b>.</p></div>
+  <div class="panel">
+    <form id="form" novalidate class="row" style="grid-template-columns:1fr auto;align-items:end">
+      <div class="field" style="margin:0"><label for="tk">Complaint token</label><input id="tk" autocomplete="off" spellcheck="false" maxlength="24" placeholder="VVIT-XXXX-XXXX-XXXX" style="font-family:ui-monospace,Menlo,monospace;text-transform:uppercase"></div>
+      <button class="btn btn-primary" type="submit">Check status</button>
+    </form>
+    <p class="msg err" id="err" hidden style="margin:1rem 0 0"></p>
+  </div>
+  <div class="panel" id="result" hidden style="margin-top:1.5rem">
+    <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:start"><div><h2 id="rSubject" style="margin-bottom:.2rem"></h2><span class="muted small" id="rToken"></span></div><span id="rChip"></span></div>
+    <ol class="progress" id="progress"></ol>
+    <dl class="kv" id="rDetails"></dl>
+    <div class="resolution" id="rRes" hidden><b>Resolution note</b><p id="rResText" style="margin:.3rem 0 0;white-space:pre-wrap"></p></div>
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/track.js"></script>
+</body></html>
