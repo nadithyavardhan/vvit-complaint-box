@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "vvit-complaint-box",
     "public": "public",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "headers": [
